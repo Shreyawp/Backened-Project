@@ -1,2 +1,2 @@
 # Backened-Project
-Contain Django/DRF Backened project
+Contains Django/DRF Backened project
