@@ -1,0 +1,9 @@
+venv/
+./__pycache__/
+.vscode/
+
+
+*.__pyc
+db.sqlite3
+.env
+start_venv.ps1
