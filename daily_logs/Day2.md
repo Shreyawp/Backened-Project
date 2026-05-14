@@ -4,7 +4,7 @@
 class UserPortfolio -> user, email
 class TradeOrder -> order_type, status, symbol, quantity, price, order_id, order_created, user
 
-def __str__ --> readbility of model objects 
+def __str__ --> user and order_id readbility of model objects 
 
 2: create migration files
 ```
@@ -36,8 +36,12 @@ python .\manage.py runserver
 
 7:Add user and an order, verify if both are created.
 
+****************************** What new Learned ******************************
 
-
-
-
+When adding the trade order and user from admin page, the objects created were looking like 
+```
+TradeOrder object (1)
+UserPortfolio object (1)
+```
+for improved readability I wanted the string to show the username for user portfolio, thus adding dunder method "__str__()"
 
