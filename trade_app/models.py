@@ -8,7 +8,7 @@ class Portfolio(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.portfolio_name
+        return f"{self.user.username} - {self.portfolio_name}"
 
 class TradeOrder(models.Model):
     OrderType = models.TextChoices("OrderType","BUY SELL")
@@ -24,4 +24,4 @@ class TradeOrder(models.Model):
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.order_id}"
+        return f"{self.order_type}-{self.symbol}-{self.status}"
