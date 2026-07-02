@@ -4,7 +4,7 @@ from .models import Portfolio, TradeOrder
 class PortfolioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Portfolio
-        fields = ('user', 'portfolio_name', 'created_at')
+        fields = ('id', 'user', 'portfolio_name', 'created_at')
 
 class TradeOrderSerializer(serializers.ModelSerializer):
     class Meta:

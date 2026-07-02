@@ -1,4 +1,4 @@
-### Day 3: Trade Profolio -- QuerySet
+### Day 4: Trade Profolio -- QuerySet
 
 1) Changed __str__() for admin/ data entry to make readable. 
 * No need to migrate as its only for readability at admin/ endpoint, does not affect DB
@@ -89,7 +89,7 @@ Miscellaneous:
 10
 ```
 
-- To create list by using python class list()
+- Convert data to list by using python class list()
 ```powershell
 >>> user_list = list(User.objects.all())
 >>> user_list
@@ -97,6 +97,7 @@ Miscellaneous:
 ```
 
 ********************************************************
+**Understanding Errors**
 operationalError: no such column
 debug info dont point to any py files cause error occur when Django generates and executes SQL against DB. 
 first suspect steps should be :
@@ -106,8 +107,6 @@ first suspect steps should be :
 
 Since model was modified to remove portfolio_name as pk, the changes should be updated to Django DB
 run `python .\manage.py makemigration` , will create migration file 0002_{..}.py
-
-run `python .\manage.py migrate` 
 
 since project is as early stage we deleted following files 
 - db.sqlite3
@@ -119,7 +118,14 @@ then run cmds:
 - migrate
 - createsuperuser
 
+**Reading:**
+- QuerySet API
+- Making Queries
+    all()
+    get()
+    filter()
+    exclude()
+    order_by()
 
-
-
-
+**To do:**
+- Create Views
