@@ -245,8 +245,24 @@ class PortfolioSerializer:
 *Specifying read only fields:* list or tuple of field names to declare as read_only in serializers class Meta using option `read_only_fields`
 `read_only_fields = ['user', 'portfolio_name']`
 
-
-
+***Flow***
+```
+Client JSON
+     ↓
+request.data
+     ↓
+Serializer(data=request.data)
+     ↓
+validated_data
+     ↓
+Model
+     ↓
+Serializer(instance=model)
+     ↓
+serializer.data
+     ↓
+Response
+```
 *****************************************************
 
 **? Doubts:**
@@ -254,10 +270,12 @@ After creating superuser, we dont need to migrate.
 `createuser` adds data/row in auth_user
 Migration only creates table
 
-**Flow:**
+**SQL Table creation Flow:**
 migrate
-   ↓
+    ↓
 createsuperuser
+    ↓
+makemigration
 * If deleted db.sqlite3, migate and createsupeuser again
 
 ___Reading:___
