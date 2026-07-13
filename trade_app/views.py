@@ -7,12 +7,9 @@ from .serializers import PortfolioSerializer, TradeOrderSerializer
 
 @api_view(["GET", 'POST'])
 def hello(request):
-    return Response({
-        "method": request.method,
-        "content_type": request.content_type,
-        "stream": request.stream,
-        "data": request.data,
-        })
+    response = Response()
+    response['Cache-Control'] = 'no-cache'
+    return response
 
 
 class ListUsersView(APIView):
