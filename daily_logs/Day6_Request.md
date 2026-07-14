@@ -89,6 +89,16 @@ add following to view function
 ```
 ![alt text](images/6_content_negotiation.PNG)
 - In the DRF Browsable API, `accepted_media_type` is typically `text/html` because the browser requests an HTML response.
+```
+Accept header (from client)
+          ↓
+Content negotiation
+          ↓
+request.accepted_media_type
+request.accepted_renderer
+          ↓
+Response (Content-Type)
+```
 
 after POST:
 ![alt text](images/6_content_negotiation_POST.PNG)
