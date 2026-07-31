@@ -2,7 +2,28 @@ GET http://localhost:8000/api/portfolios/
 Accept: application/json
 ###
 
+POST http://localhost:8000/api/portfolios/
+Content-Type: application/json
+
+{
+"user" : 2,
+"portfolio_name" : "Long Term"
+}
+###
+
 GET http://localhost:8000/api/orders/
 Accept: application/json
 ###
 
+POST http://localhost:8000/api/orders/
+Content-Type: application/json
+
+{
+"portfolio" : 1,
+"order_type" : "SELL",
+"symbol" : "AAPL",
+"status" : "Pending",
+"quantity" : 5,
+"price" : 2000
+}
+###
