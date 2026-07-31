@@ -1,5 +1,7 @@
 ### Day 5: Trade Profolio -- Views & Urls
 
+The view is the bridge between the HTTP world and the application logic.
+
 1. Create Views 
 - simply list the users
 
@@ -87,6 +89,32 @@ Vary: Accept
     }
 }
 ```
+
+***as_view() →*** Converts a class-based view into a callable view function that Django can map in urls.py.
+dispatch()  
+
+***dispatch() →*** Receives the request and routes it to the appropriate handler method (get(), post(), put(), etc.) based on the HTTP method.
+
+almost never call dispatch(), it's invoked internally after as_view() receives a request.
+```
+URL
+ ↓
+MyView.as_view()
+ ↓
+Creates a callable view function
+ ↓
+Request arrives
+ ↓
+dispatch(request, ...)
+ ↓
+Checks HTTP method
+ ↓
+get() / post() / put() / delete() ...
+```
+
+**Mixin:** provide reusable, focused functionality that can be combined with different class-based views instead of putting everything into one base class.
+
+
 ********************************************************
 Reading:
 Django docs:

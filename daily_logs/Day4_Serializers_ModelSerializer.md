@@ -62,7 +62,19 @@ class PortfolioSerializer():
 >>> serializer = PortfolioSerializer(Portfolio.objects.get(id=1))
 >>> serializer.data
 {'id': 1, 'user': 2, 'portfolio_name': 'Long Term', 'created_at': '2026-06-11T13:21:35.678711Z'}
-
+```
+```
+Database
+    ↓
+Model instance
+    ↓
+Serializer(instance)
+    ↓
+serializer.data
+    ↓
+JSON Response
+```
+```powershell
 # render serialized data into JSON
 >>> from rest_framework.renderers import JSONRenderer
 >>> json = JSONRenderer().render(serializer.data)
@@ -99,7 +111,21 @@ True
 <Portfolio: Jerry - Long Term>
 
 # Calling .save() will either create a new instance, or update an existing instance, depending on if an existing instance was passed when instantiating the serializer class
-
+```
+```
+Incoming JSON
+      ↓
+Serializer(data=...)
+      ↓
+is_valid()
+      ↓
+validated_data
+      ↓
+save()
+      ↓
+Model instance
+```
+```powershell
 # .save() will create a new instance.
 serializer = PortfolioSerializer(data=data)
 

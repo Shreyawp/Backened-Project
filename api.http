@@ -1,2 +1,8 @@
-GET http://localhost:8000/api/hello
+GET http://localhost:8000/api/portfolios/
 Accept: application/json
+###
+
+GET http://localhost:8000/api/orders/
+Accept: application/json
+###
+

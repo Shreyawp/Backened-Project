@@ -1,28 +1,36 @@
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.contrib.auth.models import User
 from .models import Portfolio, TradeOrder
 from .serializers import PortfolioSerializer, TradeOrderSerializer
 
-@api_view(["GET", 'POST'])
-def hello(request):    
-    return Response({
-        "renderer": str(request.accepted_renderer)
-    })
 
+class PortfolioView(APIView):   
 
-class ListUsersView(APIView):
     def get(self, request):
-        usernames = [user.username for user in User.objects.all()]
-        return Response(usernames)
-    
-
-class PortfolioView(APIView):
-    def get(self, request):
-        portfolio = Portfolio.objects.all()
-        serializer = PortfolioSerializer({
-            'Portfolio' : portfolio,
-            'User': User
-        })
+        queryset = Portfolio.objects.all()
+        serializer = PortfolioSerializer(queryset, many=True)
         return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = PortfolioSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
+class TradeOrderView(APIView):
+
+    def get(self, request):        
+        queryset = TradeOrder.objects.all()
+        serializer = TradeOrderSerializer(queryset, many=True)        
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = TradeOrderSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+   
