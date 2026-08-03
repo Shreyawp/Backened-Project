@@ -1,4 +1,9 @@
+##################### Porfolio #####################
 GET http://localhost:8000/api/portfolios/
+Accept: application/json
+###
+
+GET http://localhost:8000/api/portfolios/2/
 Accept: application/json
 ###
 
@@ -6,12 +11,41 @@ POST http://localhost:8000/api/portfolios/
 Content-Type: application/json
 
 {
-"user" : 2,
-"portfolio_name" : "Long Term"
+    "user" : 2,
+    "portfolio_name" : "Long Term"
 }
 ###
 
+PUT http://localhost:8000/api/portfolios/1/
+Content-Type: application/json
+
+{
+   "user" : 2,
+   "portfolio_name" : "Retirement"
+}
+###
+
+PATCH http://localhost:8000/api/portfolios/2/
+Content-Type: application/json
+
+{   
+   "portfolio_name" : "Long Term"
+}
+###
+
+DELETE http://localhost:8000/api/portfolios/21/
+###
+
+GET http://localhost:8000/api/portfolios/21/
+###
+
+##################### Orders #####################
+###
 GET http://localhost:8000/api/orders/
+Accept: application/json
+###
+
+GET http://localhost:8000/api/orders/3/
 Accept: application/json
 ###
 
@@ -19,11 +53,40 @@ POST http://localhost:8000/api/orders/
 Content-Type: application/json
 
 {
-"portfolio" : 1,
-"order_type" : "SELL",
-"symbol" : "AAPL",
-"status" : "Pending",
-"quantity" : 5,
-"price" : 2000
+    "portfolio" : 2,
+    "order_type" : "BUY",
+    "symbol" : "AAPL",
+    "status" : "Pending",
+    "quantity" : 5,
+    "price" : 250
 }
+###
+
+PUT http://localhost:8000/api/orders/14/
+Content-Type: application/json
+
+{
+    "portfolio" : 2, 
+    "order_type" : "BUY",
+    "symbol" : "AAPL",
+    "status" : "Confirmed",
+    "quantity" : 5,
+    "price" : 250
+}
+###
+
+PATCH http://localhost:8000/api/orders/3/
+Content-Type: application/json
+
+{
+    "status" : "Complete",
+    "quantity" : 3,
+    "price" : 250
+}
+###
+
+DELETE http://localhost:8000/api/orders/14/
+###
+
+GET http://localhost:8000/api/orders/14/
 ###
