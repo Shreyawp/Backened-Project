@@ -10,6 +10,7 @@ CRUD - Create Read Update Delete
 | Update    | PUT / PATCH | Modify an existing resource    |
 | Delete    | DELETE      | Remove a resource              |
 
+
 1) Create - POST method
 Creates a new resource by validating request data through a serializer and saving it to the database.
 ```python
@@ -21,9 +22,10 @@ def post(self, request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 ```
 
-Testing:
+Testing for Portfolio:
 ![alt text](images/9_order_POST.PNG)
 
+Testing for orders:
 ![alt text](images/9_order_POST.PNG)
 
 Flow:
@@ -94,12 +96,13 @@ def put(self, request, pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 ```
 
-Testing:
+Testing for Portfolio:
 ![alt text](images/10_PUT_PF.PNG)
 
+Testing for orders:
 ![alt text](images/10_PUT_order.PNG)
 
-FLow:
+Flow:
 ```
 URL (pk)
       ↓
@@ -125,9 +128,10 @@ def patch(self, request, pk):
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 ```
-Testing:
+Testing for Portfolio:
 ![alt text](images/10_PATCH_PF.PNG)
 
+Testing for orders:
 ![alt text](images/10_PATCH_order.PNG)
 
 Flow:
@@ -154,9 +158,10 @@ def delete(self, request, pk):
     return Response(status=status.HTTP_204_NO_CONTENT)
 ```
 
-Testing:
+Testing for Portfolio:
 ![alt text](<images/10_DELETE_PF_NOT_ FOUND.PNG>)
 
+Testing for Orders:
 ![alt text](images/10_DELETE_order.PNG)
 
 Flow:
