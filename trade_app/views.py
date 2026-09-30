@@ -1,67 +1,26 @@
-from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView
-from rest_framework.response import Response
-from django.http import Http404
 from .models import Portfolio, TradeOrder
 from .serializers import PortfolioSerializer, TradeOrderSerializer
-from rest_framework import status, mixins
+from rest_framework import generics
 
 
-class PortfolioView(GenericAPIView, 
-                     mixins.ListModelMixin, 
-                     mixins.CreateModelMixin):
-    queryset = Portfolio.objects.all()
-    serializer_class = PortfolioSerializer
-   
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
-
-class PortfolioDetailView(GenericAPIView, 
-                          mixins.RetrieveModelMixin,
-                          mixins.UpdateModelMixin,
-                          mixins.DestroyModelMixin):
+# To View list of portfolios or create new portfolio
+class PortfolioList(generics.ListCreateAPIView):
     queryset = Portfolio.objects.all()
     serializer_class = PortfolioSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
 
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+# To view single portfolio detail, update or delete single portfolio
+class PortfolioDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Portfolio.objects.all()
+    serializer_class = PortfolioSerializer
 
 
-class TradeOrderView(GenericAPIView, 
-                      mixins.ListModelMixin, 
-                      mixins.CreateModelMixin):
+# To View list of orders or create new order
+class OrderList(generics.ListCreateAPIView):
     queryset = TradeOrder.objects.all()
     serializer_class = TradeOrderSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
-
-class TradeOrderDetailView(GenericAPIView,
-                      mixins.RetrieveModelMixin,
-                      mixins.UpdateModelMixin,
-                      mixins.DestroyModelMixin):
+# To view single order detail, update or delete single order
+class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = TradeOrder.objects.all()
     serializer_class = TradeOrderSerializer
-
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)

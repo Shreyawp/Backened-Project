@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import PortfolioView, PortfolioDetailView, TradeOrderView, TradeOrderDetailView
+from .views import PortfolioList, PortfolioDetail, OrderList, OrderDetail
 
 urlpatterns = [
-path('portfolios/', PortfolioView.as_view()),
-path('portfolio/<int:pk>/', PortfolioDetailView.as_view()),
-path('orders/', TradeOrderView.as_view()),
-path('order/<int:pk>/', TradeOrderDetailView.as_view()),
+path('portfolios/', PortfolioList.as_view()),
+path('portfolio/<int:pk>/', PortfolioDetail.as_view()),
+path('orders/', OrderList.as_view()),
+path('order/<int:pk>/', OrderDetail.as_view()),
 ]
