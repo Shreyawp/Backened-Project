@@ -1,5 +1,5 @@
 ##################### Porfolio #####################
-GET http://localhost:8000/api/portfolios/
+GET http://localhost:8000/api/portfolios1/
 Accept: application/json
 ###
 
