@@ -1,6 +1,7 @@
 ##################### Porfolio #####################
-GET http://localhost:8000/api/portfolios1/
+GET http://localhost:8000/api/portfolio/2/
 Accept: application/json
+Authorization: Basic SmVycnk6SmVycnk=
 ###
 
 GET http://localhost:8000/api/portfolios/2/
@@ -45,8 +46,9 @@ GET http://localhost:8000/api/orders/
 Accept: application/json
 ###
 
-GET http://localhost:8000/api/orders/3/
+GET http://localhost:8000/api/order/13/
 Accept: application/json
+Authorization: Basic SmVycnk6SmVycnk=
 ###
 
 POST http://localhost:8000/api/orders/

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Portfolio(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,related_name='portfolios', on_delete=models.CASCADE)
     portfolio_name = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -21,7 +21,7 @@ class TradeOrder(models.Model):
     price = models.IntegerField()
     order_created = models.DateTimeField(auto_now_add=True)
     order_id = models.BigAutoField(primary_key=True)
-    portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
+    portfolio = models.ForeignKey(Portfolio, related_name='orders', on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.order_type}-{self.symbol}-{self.status}"
