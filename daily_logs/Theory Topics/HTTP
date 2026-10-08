@@ -1,0 +1,31 @@
+### HTTP
+
+An HttpRequest object is Django's Python object that represents one complete incoming HTTP request.
+When URL pattern is searched, Django creates one HttpRequest object representing this incoming HTTP request, and passes that object to your view.
+```
+Incoming HTTP Request
+├── URL path
+├── HTTP method (GET, POST...)
+├── Headers
+├── Query parameters
+├── Request body (if any)
+├── Cookies
+└── Other request metadata
+        │
+        ▼
+Django creates one HttpRequest instance
+        │
+        ▼
+Passed to your view as `request`
+```
+
+**Example of HTTPRequest instance**
+the URL + headers + body + other request information packaged into one Python object
+```
+POST /api/portfolios/?page=2
+Content-Type: application/json
+
+{
+    "portfolio_name": "Long Term"
+}
+```
