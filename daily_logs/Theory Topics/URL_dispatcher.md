@@ -141,5 +141,5 @@ def redirect_to_year(request):
 **Naming URL Patterns**  
 The name argument gives a URL a unique identifier, allowing it to be referenced using *reverse()* or the *{% url %}* template tag.  
 Example:
-`path("orders/", OrderView.as_view(), name="order-list")`
+`path("orders/", OrderView.as_view(), name="tradeorder-list")`
 

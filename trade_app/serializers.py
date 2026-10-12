@@ -2,27 +2,32 @@ from rest_framework import serializers
 from .models import Portfolio, TradeOrder
 from django.contrib.auth.models import User
 
-class UserSerializer(serializers.ModelSerializer):
-    portfolios = serializers.PrimaryKeyRelatedField(
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    portfolios = serializers.HyperlinkedRelatedField(
         many=True,
-        queryset=Portfolio.objects.all())
+        view_name='portfolio-detail', 
+        read_only=True
+        )
     
     class Meta:
         model = User
-        fields = ['id', 'username', 'portfolios']
+        fields = ['url', 'id', 'username', 'portfolios']
 
-class PortfolioSerializer(serializers.ModelSerializer):
+class PortfolioSerializer(serializers.HyperlinkedModelSerializer):
     # source: get username through the user FK
-    username = serializers.ReadOnlyField(source='user.username')    
-
+    username = serializers.ReadOnlyField(source='user.username') 
+    
     class Meta:
         model = Portfolio
-        fields = ('id', 'user', 'username', 'portfolio_name', 'created_at')
+        fields = ('url', 'id', 'user', 'username', 'portfolio_name', 'created_at')
 
-class TradeOrderSerializer(serializers.ModelSerializer):
+class TradeOrderSerializer(serializers.HyperlinkedModelSerializer):
     # nested Serializer: will nest portfolio details in API
-    portfolio = PortfolioSerializer(read_only=True)
+    portfolio = serializers.HyperlinkedRelatedField(
+        view_name="portfolio-detail",
+        read_only=True
+        )
 
     class Meta:
         model = TradeOrder
-        fields = ('order_id', 'portfolio', 'order_type', 'symbol','status', 'quantity', 'price')
+        fields = ('url', 'order_id', 'portfolio', 'order_type', 'symbol','status', 'quantity', 'price')
