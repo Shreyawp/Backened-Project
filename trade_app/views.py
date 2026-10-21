@@ -1,4 +1,4 @@
-from rest_framework import generics, renderers, permissions
+from rest_framework import generics, viewsets, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -25,6 +25,10 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 # To View list of portfolios or create new portfolio
 class PortfolioList(generics.ListCreateAPIView):    
@@ -43,6 +47,15 @@ class PortfolioDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PortfolioSerializer
     permission_classes = [permissions.IsAuthenticated, IsPortfolioOwner]
 
+class PortfolioViewSet(viewsets.ModelViewSet):    
+    serializer_class = PortfolioSerializer
+    permission_classes = [permissions.IsAuthenticated, IsPortfolioOwner]
+
+    def get_queryset(self):
+        return Portfolio.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 # To View list of orders or create new order
 class OrderList(generics.ListCreateAPIView):
@@ -58,3 +71,11 @@ class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = TradeOrder.objects.all()
     serializer_class = TradeOrderSerializer
     permission_classes = [permissions.IsAuthenticated, IsOrderOwner]
+
+
+class OrderViewSet(viewsets.ModelViewSet):    
+    serializer_class = TradeOrderSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOrderOwner]
+
+    def get_queryset(self):
+        return TradeOrder.objects.filter(portfolio__user=self.request.user)
